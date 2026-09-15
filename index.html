@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="google-site-verification" content="VHTRqwpMkbXv6wdXPUX-rWdJQLox_jcyuCLTEnOTwdc" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Door ❤️</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden;font-family:Georgia,"Times New Roman",serif;background:#050006}
+.screen{position:relative;width:100%;height:100vh;min-height:550px;overflow:hidden;display:flex;justify-content:center;align-items:center;background:radial-gradient(circle at center,rgba(150,30,90,.22),transparent 40%),#050006}
+.video-container{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity 2s ease;z-index:1}
+.video-container.active{opacity:1;visibility:visible}
+.video-container video{position:absolute;width:100%;height:100%;object-fit:cover;filter:brightness(.45) saturate(1.25)}
+.cinematic-overlay{position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 15%,rgba(0,0,0,.25) 50%,rgba(0,0,0,.85) 100%);z-index:2}
+.cinema-top,.cinema-bottom{position:absolute;left:0;width:100%;height:8vh;background:#000;z-index:10}
+.cinema-top{top:0}.cinema-bottom{bottom:0}
+.intro{position:relative;z-index:20;width:min(90%,500px);text-align:center;transition:opacity 1s ease,transform 1s ease}
+.intro.hide{opacity:0;transform:scale(1.08);pointer-events:none}
+.small-heart{font-size:35px;margin-bottom:15px;animation:heartbeat 1.8s infinite}
+.intro h1{color:white;font-size:clamp(35px,7vw,65px);font-weight:400;letter-spacing:2px;text-shadow:0 0 15px rgba(255,80,160,.8),0 0 35px rgba(255,30,130,.5)}
+.intro p{margin-top:12px;color:rgba(255,255,255,.7);font-family:Arial,sans-serif;font-size:14px;letter-spacing:2px}
+.name-form{margin-top:35px;display:flex;flex-direction:column;gap:15px}
+.name-input{width:100%;padding:17px 20px;border:1px solid rgba(255,255,255,.25);border-radius:50px;outline:none;background:rgba(255,255,255,.08);color:white;font-size:17px;text-align:center;backdrop-filter:blur(15px);transition:.3s ease}
+.name-input::placeholder{color:rgba(255,255,255,.55)}
+.name-input:focus{border-color:rgba(255,100,180,.8);box-shadow:0 0 20px rgba(255,50,150,.25)}
+.enter-btn{padding:16px;border:none;border-radius:50px;cursor:pointer;color:white;font-size:15px;letter-spacing:2px;background:linear-gradient(135deg,#8e245f,#e14b91);box-shadow:0 10px 35px rgba(180,30,110,.35);transition:.3s ease}
+.enter-btn:hover{transform:translateY(-2px);box-shadow:0 15px 45px rgba(220,50,140,.5)}
+.greeting{position:absolute;z-index:30;width:90%;text-align:center;opacity:0;visibility:hidden;transform:translateY(30px) scale(.95);transition:opacity 1.5s ease,transform 1.5s ease}
+.greeting.show{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
+.greeting .hello{color:rgba(255,255,255,.8);font-family:Arial,sans-serif;font-size:13px;letter-spacing:5px;text-transform:uppercase;margin-bottom:18px}
+.greeting h2{color:white;font-size:clamp(45px,10vw,100px);font-weight:400;line-height:1;word-break:break-word;text-shadow:0 0 15px rgba(255,80,170,.9),0 0 40px rgba(255,40,140,.7),0 0 80px rgba(255,0,100,.45)}
+.message{margin:28px auto 0;max-width:600px;color:rgba(255,255,255,.82);font-family:Arial,sans-serif;font-size:16px;line-height:1.8;letter-spacing:.5px}
+.cta-buttons{margin-top:34px;display:flex;flex-direction:column;align-items:center;gap:16px}
+.big-btn{display:none;padding:20px 48px;border:none;border-radius:50px;cursor:pointer;color:white;font-size:18px;font-family:Georgia,"Times New Roman",serif;letter-spacing:2px;background:linear-gradient(135deg,#8e245f,#e14b91);box-shadow:0 12px 40px rgba(200,40,120,.5);animation:btnPulse 2.4s ease-in-out infinite}
+.big-btn:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 18px 50px rgba(230,60,150,.65)}
+@keyframes btnPulse{0%,100%{box-shadow:0 12px 40px rgba(200,40,120,.5)}50%{box-shadow:0 12px 55px rgba(255,90,170,.75)}}
+.romantic{position:absolute;inset:0;z-index:5;pointer-events:none;opacity:0;transition:opacity 2s ease}.romantic.active{opacity:1}
+.glow{position:absolute;width:45vw;height:45vw;min-width:250px;min-height:250px;border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(255,50,150,.18),transparent 65%);filter:blur(20px);animation:glowPulse 4s ease-in-out infinite}
+.heart{position:absolute;bottom:-50px;color:rgba(255,100,180,.7);font-size:20px;animation:floatHeart linear forwards;filter:drop-shadow(0 0 8px rgba(255,40,140,.7))}
+.particle{position:absolute;width:3px;height:3px;border-radius:50%;background:white;opacity:.5;box-shadow:0 0 8px rgba(255,255,255,.9);animation:particleFloat linear infinite}
+@keyframes heartbeat{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
+@keyframes glowPulse{0%,100%{transform:translate(-50%,-50%) scale(.9);opacity:.5}50%{transform:translate(-50%,-50%) scale(1.15);opacity:1}}
+@keyframes floatHeart{0%{transform:translateY(0) translateX(0) rotate(0) scale(.8);opacity:0}10%{opacity:.8}50%{transform:translateY(-50vh) translateX(30px) rotate(15deg) scale(1)}100%{transform:translateY(-115vh) translateX(-40px) rotate(-15deg) scale(.7);opacity:0}}
+@keyframes particleFloat{0%{transform:translateY(100vh);opacity:0}20%{opacity:.5}80%{opacity:.5}100%{transform:translateY(-20vh);opacity:0}}
+@media(max-width:600px){.cinema-top,.cinema-bottom{height:5vh}.intro h1{font-size:42px}.greeting h2{font-size:clamp(40px,12vw,70px)}.message{font-size:14px;padding:0 10px}.video-container video{object-position:center}.big-btn{padding:16px 32px;font-size:16px}}
+</style>
+</head>
+<body>
+<div class="screen">
+<div class="video-container" id="videoContainer">
+<video id="loveVideo" src="Asad.mp4" playsinline preload="auto"></video>
+<div class="cinematic-overlay"></div>
+</div>
+<div class="romantic" id="romantic"><div class="glow"></div><div id="hearts"></div><div id="particles"></div></div>
+<div class="cinema-top"></div><div class="cinema-bottom"></div>
+<div class="intro" id="intro">
+<div class="small-heart">♡</div>
+<h1>Enter Your Name</h1>
+<p>SOME NAMES DESERVE A LITTLE MAGIC</p>
+<form class="name-form" id="nameForm">
+<input class="name-input" id="nameInput" type="text" placeholder="Write your name..." autocomplete="off" required>
+<button class="enter-btn" type="submit">ENTER ❤️</button>
+</form>
+</div>
+<div class="greeting" id="greeting">
+<div class="hello">Hello, beautiful soul</div>
+<h2 id="displayName"></h2>
+<div class="message" id="message"></div>
+<div class="cta-buttons">
+<button class="big-btn" id="playBtn" type="button">▶ Play Video</button>
+</div>
+</div>
+</div>
+<script>
+const form=document.getElementById("nameForm"),input=document.getElementById("nameInput"),intro=document.getElementById("intro"),greeting=document.getElementById("greeting"),displayName=document.getElementById("displayName"),message=document.getElementById("message"),videoContainer=document.getElementById("videoContainer"),video=document.getElementById("loveVideo"),romantic=document.getElementById("romantic"),hearts=document.getElementById("hearts"),particles=document.getElementById("particles"),playBtn=document.getElementById("playBtn");
+const specialNames=["sehar","sahar","saher","sher","shar","shr","seher","sehri","saira"];
+function normalizeName(name){return name.toLowerCase().trim().replace(/[^a-zA-Z]/g,"")}
+function isSpecialName(name){const normalized=normalizeName(name);return specialNames.some(special=>normalized.includes(special))}
+function normalGreeting(name){return `Stay happy. Stay healthy. Keep smiling and take care of yourself. ❤️`}
+function romanticGreeting(name){return `Some names are just names... and some names somehow make the whole moment feel different. ❤️`}
+function createHeart(){const heart=document.createElement("div");heart.classList.add("heart");const symbols=["♡","♥","❤","💗","💖"];heart.innerText=symbols[Math.floor(Math.random()*symbols.length)];heart.style.left=Math.random()*100+"%";heart.style.fontSize=14+Math.random()*25+"px";heart.style.animationDuration=5+Math.random()*7+"s";hearts.appendChild(heart);setTimeout(()=>heart.remove(),13000)}
+function createParticle(){const p=document.createElement("div");p.classList.add("particle");p.style.left=Math.random()*100+"%";p.style.animationDuration=5+Math.random()*8+"s";p.style.animationDelay=Math.random()*5+"s";particles.appendChild(p)}
+function startRomanticEffects(){romantic.classList.add("active");for(let i=0;i<45;i++)createParticle();setInterval(createHeart,700)}
+function playVideoSrc(src){if(!video.src.endsWith(src)){video.pause();video.src=src}videoContainer.classList.add("active");if(!romantic.classList.contains("active"))startRomanticEffects();video.currentTime=0;video.play().catch(err=>console.log("Video play error:",err))}
+form.addEventListener("submit",function(e){e.preventDefault();const name=input.value.trim();if(!name)return;displayName.innerText=name;const special=isSpecialName(name);intro.classList.add("hide");setTimeout(()=>{intro.style.display="none";greeting.classList.add("show")},700);
+if(special){message.innerHTML=romanticGreeting(name);playBtn.style.display="inline-block";playVideoSrc("Asad.mp4")}
+else{message.innerHTML=normalGreeting(name);playBtn.style.display="none"}
+});
+playBtn.addEventListener("click",()=>playVideoSrc("Asad.mp4"));
+video.addEventListener("ended",()=>{video.currentTime=0;video.play()});
+</script>
+</body>
+</html>
